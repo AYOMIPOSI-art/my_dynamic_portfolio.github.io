@@ -3,16 +3,16 @@
     {
       "name": "My First HTML Page",
       "description": "A simple static page demonstrating basic HTML structure and elements.",
-      "link": "#"
+      "link": " https://ayomiposi-art.github.io/Basic-html/"
     },
     {
       "name": "CSS Styling Practice",
       "description": "Explored various CSS properties to style text, colors, and layout.",
-      "link": "#"
+      "link": "https://ayomiposi-art.github.io/card_grid_design/"
     },
     {
       "name": "Interactive JavaScript Fun",
       "description": "Implemented basic JavaScript to add dynamic behavior and user interaction.",
-      "link": "#"
+      "link": " https://ayomiposi-art.github.io/my_dynamic_portfolio.github.io/"
     }
   ]

@@ -1,5 +1,3 @@
-// script.js
-
 // Task 1: Dynamic Year
 const currentYearSpan = document.getElementById('current-year');
 currentYearSpan.textContent = new Date().getFullYear();
@@ -16,9 +14,9 @@ const skillInfo = {
 
 skillButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const skill = button.dataset.skill; // Get the 'data-skill' attribute
+        const skill = button.dataset.skill;
         skillDescription.textContent = skillInfo[skill];
-        skillDescription.style.color = '#0056b3'; // Change text color on interaction
+        skillDescription.style.color = '#0056b3';
     });
 });
 
@@ -28,7 +26,6 @@ const body = document.body;
 
 themeToggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
-    // Save user preference (optional, but good practice)
     if (body.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
     } else {
@@ -36,37 +33,40 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 
-// Apply saved theme on page load
-window.addEventListener('load'), () => {}
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-    }
-    // script.js (add to the end)
-
 // Task 4: Load and Display Portfolio Projects from JSON
 const projectsContainer = document.getElementById('projects-container');
 
 async function loadProjects() {
     try {
-        const response = await fetch('data/portfolio_items.json'); // Fetch the JSON file
+        const response = await fetch('data/portfolio_items.json');
         if (!response.ok) {
-            // throw new Error(HTTP error! status: ${response.status});
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const projects = await response.json(); // Parse JSON data
+        const projects = await response.json();
 
         projects.forEach(project => {
             const projectCard = document.createElement('div');
             projectCard.classList.add('project-card');
             projectCard.innerHTML = `
-                <h3><span class="math-inline">\{project\.name\}</h3\></36\>
-                <p>{project.description}</p>
-<a href="${project.link}" target="_blank">View Project</a>
-`;
-projectsContainer.appendChild(projectCard);1
+                <h3>${project.name}</h3>
+                <p>${project.description}</p>
+                <a href="${project.link}" target="_blank">View Project</a>
+            `;
+            projectsContainer.appendChild(projectCard);
+        });
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        projectsContainer.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
+    }
+}
+
+// Final fix: Run all when the page loads
+window.addEventListener('load', () => {
+    // Apply dark mode theme
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+    }
+
+    // Load portfolio projects
+    loadProjects();
 });
-} catch (error) {
-console.error('Error loading projects:', error);
-projectsContainer.innerHTML = '<p>Failed to load projects. Please try again later.</p>';
-}
-}
-loadProjects(); // Call the function to load projects when the page loads
